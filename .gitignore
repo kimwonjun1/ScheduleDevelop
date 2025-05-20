@@ -1,0 +1,84 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+# ========================
+# Java
+# ========================
+*.class
+*.log
+*.jar
+*.war
+*.ear
+
+# 빌드 디렉토리
+/build/
+!/src/
+
+# ========================
+# Gradle
+# ========================
+.gradle/
+build/
+
+# Gradle Wrapper 캐시
+**/gradle-wrapper.jar
+
+# 로그
+.gradle/logs/
+.gradle/caches/
+
+# ========================
+# IntelliJ IDEA
+# ========================
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# ========================
+# macOS 시스템 파일
+# ========================
+.DS_Store
+
+# ========================
+# 기타 (테스트 리포트, 임시 파일 등)
+# ========================
+test-output/
+*.tmp
+*.swp
+*.bak
