@@ -42,8 +42,16 @@ public class ScheduleService {
     public ScheduleWithUserNameResponseDto findById(Long id) {
 
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
-        User user = findSchedule.getUser();
+        User writer = findSchedule.getUser();
 
-        return new ScheduleWithUserNameResponseDto(findSchedule.getTitle(), findSchedule.getContent(), user.getUsername());
+        return new ScheduleWithUserNameResponseDto(findSchedule.getTitle(), findSchedule.getContent(), writer.getUsername());
+    }
+
+    public void delete(Long id) {
+
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+
+        scheduleRepository.delete(findSchedule);
+
     }
 }
