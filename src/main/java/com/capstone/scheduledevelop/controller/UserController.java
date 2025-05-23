@@ -2,6 +2,7 @@ package com.capstone.scheduledevelop.controller;
 
 import com.capstone.scheduledevelop.dto.SignUpRequestDto;
 import com.capstone.scheduledevelop.dto.SignUpResponseDto;
+import com.capstone.scheduledevelop.dto.UpdateUserRequestDto;
 import com.capstone.scheduledevelop.dto.UserResponseDto;
 import com.capstone.scheduledevelop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -37,4 +38,11 @@ public class UserController {
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UpdateUserRequestDto updateUserRequestDto) {
+
+        userService.updatePassword(id,updateUserRequestDto.getOldPassword(), updateUserRequestDto.getNewPassword());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
