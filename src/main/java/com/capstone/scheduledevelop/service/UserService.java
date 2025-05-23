@@ -17,13 +17,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    public SignUpResponseDto signUp(String name, String email, String password) {
+    public SignUpResponseDto signUp(String username, String email, String password) {
 
-        User user = new User(name, email, password);
+        User user = new User(username, email, password);
 
         User savedUser = userRepository.save(user);
 
-        return new SignUpResponseDto(savedUser.getId(), savedUser.getEmail(), savedUser.getPassword());
+        return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
     public UserResponseDto findById(Long id) {
@@ -36,7 +36,7 @@ public class UserService {
 
         User findUser = optionalUser.get();
 
-        return new UserResponseDto(findUser.getName(), findUser.getEmail());
+        return new UserResponseDto(findUser.getUsername(), findUser.getEmail());
     }
 
     @Transactional

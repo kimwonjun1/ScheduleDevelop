@@ -1,7 +1,9 @@
 package com.capstone.scheduledevelop.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "schedule")
 public class Schedule extends BaseEntity {
@@ -20,5 +22,15 @@ public class Schedule extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Schedule() {}
+
+    public Schedule(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

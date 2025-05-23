@@ -22,7 +22,7 @@ public class UserController {
 
         SignUpResponseDto signUpResponseDto =
                 userService.signUp(
-                        signUpRequestDto.getName(),
+                        signUpRequestDto.getUsername(),
                         signUpRequestDto.getEmail(),
                         signUpRequestDto.getPassword()
                 );
