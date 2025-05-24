@@ -1,9 +1,12 @@
 package com.capstone.scheduledevelop.service;
 
+import com.capstone.scheduledevelop.dto.LoginResponseDto;
 import com.capstone.scheduledevelop.dto.SignUpResponseDto;
 import com.capstone.scheduledevelop.dto.UserResponseDto;
 import com.capstone.scheduledevelop.entity.User;
 import com.capstone.scheduledevelop.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -50,5 +53,18 @@ public class UserService {
 
         findUser.updatePassword(newPassword);
 
+    }
+
+    public LoginResponseDto login(String email, String password, HttpServletRequest request) {
+        User user = userRepository.findByEmailElseThrow(email);
+
+        if (!user.getPassword().equals(password)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+
+        return new LoginResponseDto(user.getId());
     }
 }

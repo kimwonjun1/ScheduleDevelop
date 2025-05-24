@@ -1,10 +1,8 @@
 package com.capstone.scheduledevelop.controller;
 
-import com.capstone.scheduledevelop.dto.SignUpRequestDto;
-import com.capstone.scheduledevelop.dto.SignUpResponseDto;
-import com.capstone.scheduledevelop.dto.UpdateUserRequestDto;
-import com.capstone.scheduledevelop.dto.UserResponseDto;
+import com.capstone.scheduledevelop.dto.*;
 import com.capstone.scheduledevelop.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,4 +43,17 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request) {
+
+        LoginResponseDto loginResponseDto = userService.login(
+                loginRequestDto.getEmail(),
+                loginRequestDto.getPassword(),
+                request
+        );
+
+        return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+    }
+
 }

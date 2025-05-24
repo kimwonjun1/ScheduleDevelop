@@ -25,4 +25,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exists id = " + id));
     }
 
+    Optional<User> findByEmail(String email);
+
+    default User findByEmailElseThrow(String email) {
+        return findByEmail(email)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exists email = " + email));
+    }
 }
