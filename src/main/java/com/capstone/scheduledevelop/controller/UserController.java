@@ -3,6 +3,7 @@ package com.capstone.scheduledevelop.controller;
 import com.capstone.scheduledevelop.dto.*;
 import com.capstone.scheduledevelop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
+    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto) {
 
         SignUpResponseDto signUpResponseDto =
                 userService.signUp(
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UpdateUserRequestDto updateUserRequestDto) {
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
 
         userService.updatePassword(id,updateUserRequestDto.getOldPassword(), updateUserRequestDto.getNewPassword());
 
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto, HttpServletRequest request) {
 
         LoginResponseDto loginResponseDto = userService.login(
                 loginRequestDto.getEmail(),

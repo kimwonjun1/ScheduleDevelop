@@ -4,6 +4,7 @@ import com.capstone.scheduledevelop.dto.CreateScheduleRequestDto;
 import com.capstone.scheduledevelop.dto.ScheduleResponseDto;
 import com.capstone.scheduledevelop.dto.ScheduleWithUserNameResponseDto;
 import com.capstone.scheduledevelop.service.ScheduleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> save(@RequestBody CreateScheduleRequestDto createScheduleRequestDto) {
+    public ResponseEntity<ScheduleResponseDto> save(@RequestBody @Valid CreateScheduleRequestDto createScheduleRequestDto) {
 
         ScheduleResponseDto scheduleResponseDto =
                 scheduleService.save(
