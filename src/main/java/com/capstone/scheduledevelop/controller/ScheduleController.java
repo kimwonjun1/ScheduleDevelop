@@ -1,8 +1,6 @@
 package com.capstone.scheduledevelop.controller;
 
-import com.capstone.scheduledevelop.dto.CreateScheduleRequestDto;
-import com.capstone.scheduledevelop.dto.ScheduleResponseDto;
-import com.capstone.scheduledevelop.dto.ScheduleWithUserNameResponseDto;
+import com.capstone.scheduledevelop.dto.*;
 import com.capstone.scheduledevelop.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +44,15 @@ public class ScheduleController {
 
         return new ResponseEntity<>(scheduleWithUserNameResponseDto, HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateContent(@PathVariable Long id, @RequestBody UpdateScheduleRequestDto updateScheduleRequestDto) {
+
+        scheduleService.updateSchedule(id, updateScheduleRequestDto.getContent());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
