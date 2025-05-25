@@ -1,5 +1,6 @@
 package com.capstone.scheduledevelop.service;
 
+import com.capstone.scheduledevelop.config.PasswordEncoder;
 import com.capstone.scheduledevelop.dto.LoginResponseDto;
 import com.capstone.scheduledevelop.dto.SignUpResponseDto;
 import com.capstone.scheduledevelop.dto.UserResponseDto;
@@ -20,9 +21,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
     public SignUpResponseDto signUp(String username, String email, String password) {
 
-        User user = new User(username, email, password);
+        String encodedPassword = passwordEncoder.encode(password);
+
+        User user = new User(username, email, encodedPassword);
 
         User savedUser = userRepository.save(user);
 
@@ -47,18 +52,19 @@ public class UserService {
 
         User findUser = userRepository.findByIdOrElseThrow(id);
 
-        if (!findUser.getPassword().equals(oldPassword)) {
+        if (!passwordEncoder.matches(oldPassword, findUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
-        findUser.updatePassword(newPassword);
+        String encodedNewPassword = passwordEncoder.encode(newPassword);
+        findUser.updatePassword(encodedNewPassword);
 
     }
 
     public LoginResponseDto login(String email, String password, HttpServletRequest request) {
         User user = userRepository.findByEmailElseThrow(email);
 
-        if (!user.getPassword().equals(password)) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
