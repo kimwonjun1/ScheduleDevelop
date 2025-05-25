@@ -4,6 +4,7 @@ import com.capstone.scheduledevelop.config.PasswordEncoder;
 import com.capstone.scheduledevelop.dto.LoginResponseDto;
 import com.capstone.scheduledevelop.dto.SignUpResponseDto;
 import com.capstone.scheduledevelop.dto.UserResponseDto;
+import com.capstone.scheduledevelop.entity.Schedule;
 import com.capstone.scheduledevelop.entity.User;
 import com.capstone.scheduledevelop.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,6 +62,14 @@ public class UserService {
 
     }
 
+    public void delete(Long id) {
+
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        userRepository.delete(findUser);
+
+    }
+
     public LoginResponseDto login(String email, String password, HttpServletRequest request) {
         User user = userRepository.findByEmailElseThrow(email);
 
@@ -73,4 +82,5 @@ public class UserService {
 
         return new LoginResponseDto(user.getId());
     }
+
 }

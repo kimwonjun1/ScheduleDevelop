@@ -1,5 +1,6 @@
 package com.capstone.scheduledevelop.service;
 
+import com.capstone.scheduledevelop.dto.SchedulePageResponseDto;
 import com.capstone.scheduledevelop.dto.ScheduleResponseDto;
 import com.capstone.scheduledevelop.dto.ScheduleWithUserNameResponseDto;
 import com.capstone.scheduledevelop.entity.Comment;
@@ -9,6 +10,8 @@ import com.capstone.scheduledevelop.repository.ScheduleRepository;
 import com.capstone.scheduledevelop.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +42,13 @@ public class ScheduleService {
                 .map(ScheduleResponseDto::toDto)
                 .toList();
 
+    }
+
+    // 페이징 조건에 따라 Schedule 목록을 가져와 SchedulePageResponseDto 로 변환하여 반환
+    public Page<SchedulePageResponseDto> findPagedSchedules(Pageable pageable) {
+
+        return scheduleRepository.findAll(pageable)
+                .map(SchedulePageResponseDto::new);
     }
 
     public ScheduleWithUserNameResponseDto findById(Long id) {

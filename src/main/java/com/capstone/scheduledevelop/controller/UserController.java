@@ -45,6 +45,14 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        userService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto, HttpServletRequest request) {
 
