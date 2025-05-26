@@ -22,8 +22,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
 
-    // 일정 생성 API 
-    // json 데이터
+    // 일정 생성 API
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> save(@RequestBody @Valid CreateScheduleRequestDto createScheduleRequestDto) {
 

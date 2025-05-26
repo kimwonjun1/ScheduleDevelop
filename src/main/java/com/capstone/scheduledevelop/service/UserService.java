@@ -2,6 +2,7 @@ package com.capstone.scheduledevelop.service;
 
 import com.capstone.scheduledevelop.config.PasswordEncoder;
 import com.capstone.scheduledevelop.dto.LoginResponseDto;
+import com.capstone.scheduledevelop.dto.ScheduleResponseDto;
 import com.capstone.scheduledevelop.dto.SignUpResponseDto;
 import com.capstone.scheduledevelop.dto.UserResponseDto;
 import com.capstone.scheduledevelop.entity.Schedule;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,15 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
+    }
+
+    public List<UserResponseDto> findAll() {
+
+        return userRepository.findAll()
+                .stream()
+                .map(UserResponseDto::toDto)
+                .toList();
+
     }
 
     public UserResponseDto findById(Long id) {
