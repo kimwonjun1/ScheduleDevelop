@@ -104,7 +104,7 @@
 
 ---      
 ### ERD
-
+![앱 실행 화면](images/ScheduleDevelop_ERD.png)
 ---
 ### 개발 환경
 - IDE : IntelliJ, JDK : 17.0.10 버전 사용
