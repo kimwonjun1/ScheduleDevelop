@@ -1,6 +1,9 @@
 package com.capstone.scheduledevelop.controller;
 
-import com.capstone.scheduledevelop.dto.*;
+import com.capstone.scheduledevelop.dto.comment.CommentRequestDto;
+import com.capstone.scheduledevelop.dto.comment.CommentResponseDto;
+import com.capstone.scheduledevelop.dto.comment.CommentWithUserNameResponseDto;
+import com.capstone.scheduledevelop.dto.comment.UpdateCommentRequestDto;
 import com.capstone.scheduledevelop.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

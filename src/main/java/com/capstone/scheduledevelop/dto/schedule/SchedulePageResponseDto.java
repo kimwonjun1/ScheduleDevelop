@@ -1,4 +1,4 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.schedule;
 
 
 import com.capstone.scheduledevelop.entity.Schedule;

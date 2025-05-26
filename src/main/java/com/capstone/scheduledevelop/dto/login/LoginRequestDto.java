@@ -1,4 +1,4 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.login;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

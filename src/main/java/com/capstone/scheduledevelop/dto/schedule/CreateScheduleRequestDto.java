@@ -1,4 +1,4 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.schedule;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

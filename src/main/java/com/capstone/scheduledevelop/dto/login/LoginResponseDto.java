@@ -1,4 +1,4 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.login;
 
 import lombok.Getter;
 

@@ -1,6 +1,8 @@
 package com.capstone.scheduledevelop.service;
 
-import com.capstone.scheduledevelop.dto.*;
+import com.capstone.scheduledevelop.dto.comment.CommentRequestDto;
+import com.capstone.scheduledevelop.dto.comment.CommentResponseDto;
+import com.capstone.scheduledevelop.dto.comment.CommentWithUserNameResponseDto;
 import com.capstone.scheduledevelop.entity.Comment;
 import com.capstone.scheduledevelop.entity.Schedule;
 import com.capstone.scheduledevelop.entity.User;

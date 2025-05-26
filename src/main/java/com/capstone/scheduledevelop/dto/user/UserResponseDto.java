@@ -1,6 +1,5 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.user;
 
-import com.capstone.scheduledevelop.entity.Schedule;
 import com.capstone.scheduledevelop.entity.User;
 import lombok.Getter;
 

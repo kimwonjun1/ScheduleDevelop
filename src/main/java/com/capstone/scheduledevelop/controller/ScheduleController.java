@@ -1,6 +1,6 @@
 package com.capstone.scheduledevelop.controller;
 
-import com.capstone.scheduledevelop.dto.*;
+import com.capstone.scheduledevelop.dto.schedule.*;
 import com.capstone.scheduledevelop.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

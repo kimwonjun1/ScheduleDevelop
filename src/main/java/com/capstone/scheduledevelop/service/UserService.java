@@ -1,11 +1,9 @@
 package com.capstone.scheduledevelop.service;
 
 import com.capstone.scheduledevelop.config.PasswordEncoder;
-import com.capstone.scheduledevelop.dto.LoginResponseDto;
-import com.capstone.scheduledevelop.dto.ScheduleResponseDto;
-import com.capstone.scheduledevelop.dto.SignUpResponseDto;
-import com.capstone.scheduledevelop.dto.UserResponseDto;
-import com.capstone.scheduledevelop.entity.Schedule;
+import com.capstone.scheduledevelop.dto.login.LoginResponseDto;
+import com.capstone.scheduledevelop.dto.user.SignUpResponseDto;
+import com.capstone.scheduledevelop.dto.user.UserResponseDto;
 import com.capstone.scheduledevelop.entity.User;
 import com.capstone.scheduledevelop.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;

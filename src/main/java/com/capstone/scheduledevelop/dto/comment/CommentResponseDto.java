@@ -1,7 +1,6 @@
-package com.capstone.scheduledevelop.dto;
+package com.capstone.scheduledevelop.dto.comment;
 
 import com.capstone.scheduledevelop.entity.Comment;
-import com.capstone.scheduledevelop.entity.Schedule;
 import lombok.Getter;
 
 @Getter
