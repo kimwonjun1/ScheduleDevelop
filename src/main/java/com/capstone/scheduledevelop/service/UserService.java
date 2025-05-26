@@ -23,20 +23,21 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
 
+    // 생성자를 통한 UserRepository, PasswordEncoder 의존성 주입
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
+
+    // 유저 생성 비즈니스 로직
     public SignUpResponseDto signUp(String username, String email, String password) {
 
         String encodedPassword = passwordEncoder.encode(password);
-
         User user = new User(username, email, encodedPassword);
-
         User savedUser = userRepository.save(user);
 
         return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
+    // 유저 전체 조회 비즈니스 로직
     public List<UserResponseDto> findAll() {
 
         return userRepository.findAll()
@@ -46,6 +47,7 @@ public class UserService {
 
     }
 
+    // 유저 단건 조회 비즈니스 로직
     public UserResponseDto findById(Long id) {
 
         Optional<User> optionalUser = userRepository.findById(id);
@@ -59,6 +61,7 @@ public class UserService {
         return new UserResponseDto(findUser.getUsername(), findUser.getEmail());
     }
 
+    // 유저 수정 비즈니스 로직
     @Transactional
     public void updatePassword(Long id, String oldPassword, String newPassword) {
 
@@ -73,6 +76,7 @@ public class UserService {
 
     }
 
+    // 유저 삭제 비즈니스 로직
     public void delete(Long id) {
 
         User findUser = userRepository.findByIdOrElseThrow(id);
@@ -81,6 +85,7 @@ public class UserService {
 
     }
 
+    // 로그인 비즈니스 로직
     public LoginResponseDto login(String email, String password, HttpServletRequest request) {
         User user = userRepository.findByEmailElseThrow(email);
 

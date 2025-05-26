@@ -13,6 +13,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<Comment> findCommentById(Long id);
 
+    // ID에 맞는 댓글 조회 후 없는 경우 NOT_FOUND 상태코드 리턴
     default Comment findCommentByIdOrElseThrow(Long id) {
         return findCommentById(id)
                 .orElseThrow(() ->

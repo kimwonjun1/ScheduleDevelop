@@ -17,10 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
 
+    // 생성자를 통한 CommentRepository, UserRepository, ScheduleRepository 의존성 주입
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
 
+    // 댓글 생성 비즈니스 로직
     @Transactional
     public CommentResponseDto save(CommentRequestDto commentRequestDto) {
 
@@ -33,6 +35,7 @@ public class CommentService {
         return toDto(saved);
     }
 
+    // 댓글 전체 조회 비즈니스 로직
     public List<CommentResponseDto> findAll() {
         List<Comment> comments = commentRepository.findAll();
 
@@ -40,7 +43,7 @@ public class CommentService {
                 .map(CommentResponseDto::toDto)
                 .toList();
     }
-
+    // 댓글 단건 조회 비즈니스 로직
     public CommentWithUserNameResponseDto findById(Long id) {
 
         Comment findComment = commentRepository.findCommentByIdOrElseThrow(id);
@@ -49,6 +52,7 @@ public class CommentService {
         return new CommentWithUserNameResponseDto(findComment.getId(), findComment.getContent(), writer.getUsername());
     }
 
+    // 댓글 수정 비즈니스 로직
     @Transactional
     public void updateComment(Long id, String content) {
 
@@ -56,14 +60,14 @@ public class CommentService {
         comment.updateContent(content);
     }
 
+    // 댓글 삭제 비즈니스 로직
     public void delete(Long id) {
 
         Comment findComment = commentRepository.findCommentByIdOrElseThrow(id);
-
         commentRepository.delete(findComment);
-
     }
 
+    // Comment entity -> CommentResponseDto 변환 메서드
     private CommentResponseDto toDto(Comment comment) {
         return new CommentResponseDto(
                 comment.getId(),

@@ -10,16 +10,16 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 유저 고유 식별자
 
     @Column(nullable = false)
-    private String username;
+    private String username; // 유저명
 
     @Column(nullable = false)
-    private String email;
+    private String email; // 이메일
 
     @Column(nullable = false)
-    private String password;
+    private String password; // 비밀번호
 
     public User() {}
 

@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
+    // ID에 맞는 일정 조회 후 없는 경우 NOT_FOUND 상태코드 리턴
     default Schedule findByIdOrElseThrow(Long id) {
     return findById(id)
             .orElseThrow(() ->

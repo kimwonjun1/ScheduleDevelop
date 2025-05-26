@@ -20,9 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleService {
 
+    // 생성자를 통한 UserRepository, ScheduleRepository 의존성 주입
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
 
+    // 일정 생성 비즈니스 로직
     public ScheduleResponseDto save(String title, String content, String username) {
 
         User findUser = userRepository.findUserByUsernameOrElseThrow(username);
@@ -35,6 +37,7 @@ public class ScheduleService {
         return new ScheduleResponseDto(savedSchedule.getId(), savedSchedule.getTitle(), savedSchedule.getContent());
     }
 
+    // 일정 전체 조회 비즈니스 로직
     public List<ScheduleResponseDto> findAll() {
 
         return scheduleRepository.findAll()
@@ -44,6 +47,7 @@ public class ScheduleService {
 
     }
 
+    // 일정 페이징 조회 비즈니스 로직
     // 페이징 조건에 따라 Schedule 목록을 가져와 SchedulePageResponseDto 로 변환하여 반환
     public Page<SchedulePageResponseDto> findPagedSchedules(Pageable pageable) {
 
@@ -51,6 +55,7 @@ public class ScheduleService {
                 .map(SchedulePageResponseDto::new);
     }
 
+    // 일정 단건 조회 비즈니스 로직
     public ScheduleWithUserNameResponseDto findById(Long id) {
 
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
@@ -59,6 +64,7 @@ public class ScheduleService {
         return new ScheduleWithUserNameResponseDto(findSchedule.getTitle(), findSchedule.getContent(), writer.getUsername());
     }
 
+    // 일정 수정 비즈니스 로직
     @Transactional
     public void updateSchedule(Long id, String content) {
 
@@ -66,6 +72,7 @@ public class ScheduleService {
         schedule.updateContent(content);
     }
 
+    // 일정 삭제 비즈니스 로직
     public void delete(Long id) {
 
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
