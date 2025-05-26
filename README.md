@@ -81,13 +81,28 @@
 ### API 명세서  
 ## 📌 Schedule API 명세
 
+## 📌 Schedule API 명세
+
+## 📌 Schedule API 명세
+
 | 기능           | Method | URL                      | Request                         | Request 예시 | Response                       | Response 예시 | 상태코드       |
 |----------------|--------|---------------------------|----------------------------------|---------------|-------------------------------|----------------|----------------|
-| 일정 생성       | POST   | /api/schedules            | requestBody<br>ㆍ할일 제목: String<br>ㆍ할일 내용: String<br>ㆍ유저명: String | ```json<br>{<br>  "title": "spring project",<br>  "content": "schedule develop",<br>  "username": "김원준"<br>}``` | 생성된 일정 정보<br>ㆍ일정 ID: Long<br>ㆍ할일 제목: String<br>ㆍ할일 내용: String | ```json<br>{<br>  "id": 1,<br>  "title": "spring project",<br>  "content": "schedule develop"<br>}``` | 201 : 정상등록 |
-| 일정 단건 조회   | GET    | /api/schedules/{id}       | requestParam<br>ㆍ일정 ID: Long | `/api/schedules/1` | 단건 일정 정보<br>ㆍ할일 제목: String<br>ㆍ할일 내용: String<br>ㆍ유저명: String | ```json<br>{<br>  "title": "spring project",<br>  "content": "schedule develop",<br>  "username": "김원준"<br>}``` | 200 : 정상조회 |
-| 일정 전체 조회   | GET    | /api/schedules            | X                               | `/api/schedules` | 전체 일정 정보 리스트         | ```json<br>[<br>  {<br>    "id": 1,<br>    "title": "spring project",<br>    "content": "schedule develop"<br>  }<br>]``` | 200 : 정상조회 |
-| 일정 수정       | PATCH  | /api/schedules/{id}       | requestBody<br>ㆍ할일 내용: String<br>requestParam<br>ㆍ일정 ID: Long | `/api/schedules/1`<br>```json<br>{<br>  "content": "schedule develop2"<br>}``` | X                             | 200 OK         | 200 : 정상수정<br>400 : 비밀번호 |
-| 일정 삭제       | DELETE | /api/schedules/{id}       | requestParam<br>ㆍ일정 ID: Long | `/api/schedules/1` | X                             | 200 OK         | 200 : 정상삭제<br>400 : 비밀번호 |
+| 일정 생성       | POST   | /api/schedules            | requestBody<br>ㆍ할일 제목: String<br>ㆍ할일 내용: String<br>ㆍ유저명: String |  { "title": "spring project", <br>"content": "schedule develop",<br> "username": "김원준" } | 생성된 일정 정보<br>일정 ID : Long<br>할일 제목 : String<br>할일 내용 : String| response샘플<br> {"id" : 1,<br>"title" : "spring project"<br>"content" : "schedule develop" }|201 : 정상등록 |
+| 일정 단건 조회   | GET    | /api/schedules/{id}       | requestParam<br>일정 ID : Long | /api/schedules/1|단건 일정 정보<br>할일 제목 : Stirng<br>할일 내용 : String<br>유저명 : String<br> | { "title" : "spring project"<br>"content" : "schedule develop"<br>"username" : "김원준" } | 200 : 정상조회 |
+| 일정 전체 조회   | GET    | /api/schedules            | X                               | /api/schedules | 전체 일정 정보 리스트<br> [ { 일정 ID : Long<br>할일 제목 : String<br>할일 내용 : String } ]         | [ { "id" : 1,<br>"title" : "spring project",<br>"content" : "schedule develop" } ] | 200 : 정상조회 |
+| 일정 수정       | PATCH  | /api/schedules/{id}       | requestBody<br>할일 내용 : String<br>requestParam<br>일정ID     : Long | /api/schedules/1<br>{ "content": "schedule develop2" } | X                             | 200 OK         | 200 : 정상수정<br>400 : 비밀번호 오류 |
+| 일정 삭제       | DELETE | /api/schedules/{id}       | requestParam<br>일정ID    : Long | /api/schedules/1 | X                             | 200 OK         | 200 : 정상삭제<br>400 : 비밀번호 오류 |
+| 유저 생성 | POST		| /api/signup  | requestBody<br>유저명 : String<br>이메일 : String<br>비밀번호 : String | {"name" : "김원준",<br>"email" :	"example.com",<br>"password" : "pw123" } | 생성된 유저 정보<br> 유저 ID : Long<br>유저명 : String<br>이메일 : String | { "id" : 1,<br>"name" : "김원준"<br>"email" :	"example.com" } | 201 : 정상 등록
+| 유저 단건 조회 | GET		| /api/users/{id} | requestParam<br>유저 ID : Long | /api/users/1 | 단건 유저 정보<br>유저명 : String<br>이메일 : String | { "name" : "김원준",<br>"email" :	"example.com" } | 200 : 정상조회<br>404 : 조회실패
+| 유저 수정	 | PATCH		| /api/users/{id} | requestBody<br>기존 비밀번호: String<br>새 비밀번호 : String<br>requestParam<br>유저 ID : Long | /api/users/1<br>{ "oldPassword" : "pw123"<br>"newPassword" : "pw111" } | X | 200 OK | 200 : 정상수정
+| 유저 삭제	 | DELETE		| /api/users/{id} | requestParam<br>유저 ID : Long | /api/users/1 | X | 200 OK | 200 : 정상삭제
+| 로그인		| POST		| /api/login | requestBody<br>이메일 : String<br>비밀번호 : String | { "email" : "example.com",<br>"password" : "pw123" } | 유저 정보	<br>유저 ID : Long | { "id" : 1 } | 200 : 정상 로그인<br>401 : 로그인 실패
+| 댓글 생성	| POST		| /api/comments | requestBody<br>댓글 내용 : String | { "content" : "댓글 내용",<br> "userId" : 1,<br>"scheduleId" : 1 } | 생성된 댓글 정보<br>댓글 ID : Long<br>댓글 내용 : String<br>유저 ID : Long<br>일정 ID : Long | { "id" : 1<br>"content" : "댓글 내용"<br>"userId" : 1<br>"scheduleId" : 1 } | 201 : 정상생성
+| 댓글 단건 조회 | GET		| /api/comments/{id} | requestParam<br>댓글 ID : Long | /api/comment/1 | 단건 댓글 정보<br>댓글 ID : String<br>댓글 내용 : String<br>유저명 : String | { "id" : 1,<br>"content" : "댓글 내용",<br>"username" : "김원준" } | 200 : 정상생성
+| 댓글 전체 조회 | GET		| /api/comments | X			| /api/comments | 댓글 정보 리스트<br> [ { 댓글 ID : String<br>댓글 내용 : String<br>유저명 : String } ] | [ { "id" : 1,<br>"content" : "댓글 내용",<br>"username" : "김원준" } ] | 200 : 정상생성
+| 댓글 수정	| PATCH		| /api/comments/{id} | requestBody		<br>댓글 내용 : String | { "content" : "댓글 내용2" } | X | 200 OK | 200 : 정상수정
+| 댓글 삭제	| DELETE		| /api/comments/{id} | requestParam <br> 댓글 ID	 | /api/comments/1 | X | 200 OK | 200 : 정상삭제
+
 
 
 ---      
